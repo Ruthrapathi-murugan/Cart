@@ -1,21 +1,34 @@
-// App.js
+
 import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Navbar';
 import Header from './Header';
 import Card from './Card';
+import Cart from './Cart';
 
 function App() {
-  // Define products array
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartOpen, setCartOpen] = useState(false); // State to manage cart visibility
 
   const addToCart = (product) => {
-    // Add the selected product to the cart
     setCartItems([...cartItems, product]);
-    // Increment the cart count by 1
     setCartCount(cartCount + 1);
+  };
+
+  const removeFromCart = (product) => {
+    const index = cartItems.findIndex(item => item.id === product.id);
+    if (index !== -1) {
+      const newCartItems = [...cartItems];
+      newCartItems.splice(index, 1);
+      setCartItems(newCartItems);
+      setCartCount(cartCount - 1);
+    }
+  };
+
+  const toggleCart = () => {
+    setCartOpen(!cartOpen);
   };
 
   const products = [
@@ -71,22 +84,22 @@ function App() {
 
   return (
     <>
-      <Navbar cartItemCount={cartCount} cartItems={cartItems} />
-      <div className="cartbut" style={{ padding: '20px', justifyContent: 'right' }}>
-        {/* Display the number of items in the cart */}
+      <Navbar cartItemCount={cartCount} cartItems={cartItems} toggleCart={toggleCart} /> {/* Pass toggleCart function */}
+      <div className="cartbut" style={{ display: 'flex', justifyContent: 'flex-end', padding: '20px' }}>
         Cart: {cartCount}
+        {cartOpen && <Cart cartItems={cartItems} removeFromCart={removeFromCart} />} {/* Render Cart component if cartOpen is true */}
       </div>
       <Header />
       <div className="container">
         <div className="row">
-          <div className="id" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', gap: '20px', flexWrap: 'wrap' }}>
-            {/* Mapping through products array to render Card components */}
-            {products.map((product, index) => (
-              <Card key={index} product={product} addToCart={addToCart} />
+          <div className="product-grid" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', gap: '20px', flexWrap: 'wrap' }}>
+            {products.map((product) => (
+              <Card key={product.id} product={product} addToCart={addToCart} />
             ))}
           </div>
         </div>
       </div>
+     
     </>
   );
 }

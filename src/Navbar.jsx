@@ -1,7 +1,8 @@
 // Navbar.js
 import React from 'react';
+import { BiCart } from 'react-icons/bi';
 
-function Navbar({ cartItemCount, cartItems }) {
+function Navbar({ cartItemCount, toggleCart }) { // Include toggleCart in props
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,25 +18,15 @@ function Navbar({ cartItemCount, cartItems }) {
                 <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
               </li>
             </ul>
-            <form className="d-flex">
-              <button className="btn btn-outline-dark" type="submit">
-                <i className="bi-cart-fill me-1"></i>
-                Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill">{cartItemCount}</span>
-              </button>
-            </form>
+            {/* Add onClick event to the cart button to trigger toggleCart */}
+            <button className="btn btn-outline-dark" type="button" onClick={toggleCart}> {/* Call toggleCart onClick */}
+              <BiCart className="me-1" />
+              Cart
+              <span className="badge bg-dark text-white ms-1 rounded-pill">{cartItemCount}</span>
+            </button>
           </div>
         </div>
       </nav>
-      {/* Display the items in the cart */}
-      <div>
-        <h5>Items in Cart:</h5>
-        <ul>
-          {cartItems.map((item, index) => (
-            <li key={index}>{item.name}</li>
-          ))}
-        </ul>
-      </div>
     </>
   );
 }
