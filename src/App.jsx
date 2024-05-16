@@ -79,6 +79,12 @@ function App() {
       name: "iCloth",
       image: "https://picsum.photos/200/200",
       price: 5000,
+    },
+    {
+      id: 9,
+      name: "ikk",
+      image: "https://picsum.photos/200/200",
+      price: 5000,
     }
   ];
 
