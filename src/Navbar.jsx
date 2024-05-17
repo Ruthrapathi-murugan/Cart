@@ -18,6 +18,7 @@ function Navbar({ cartItemCount, toggleCart }) { // Include toggleCart in props
                 <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
               </li>
             </ul>
+        
             {/* Add onClick event to the cart button to trigger toggleCart */}
             <button className="btn btn-outline-dark" type="button" onClick={toggleCart}> {/* Call toggleCart onClick */}
               <BiCart className="me-1" />
