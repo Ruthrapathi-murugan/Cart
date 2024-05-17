@@ -7,7 +7,7 @@ function Header() {
     <h1 style={{alignContent:'center',textAlign:'center'}}>RUTHRAPATHI SHOPING SITE</h1>
     </div>
       <header style={{ 
-        backgroundImage: 'url("/img2.jpg")', // Path to the image in the public folder
+        backgroundImage: 'url("/Images/img2.jpg")', // Path to the image in the public folder
         backgroundSize: 'cover',
         backgroundPosition: 'top',
         backgroundRepeat: 'no-repeat'
